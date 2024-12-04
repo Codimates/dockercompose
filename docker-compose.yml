@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+
+  ead:
+    container_name: client
+    image: dasuntheek/codimates-client:latest
+    ports:
+      - "3000:3000"
+    networks:
+      - codimates-network
+
+  ead2:
+    container_name: gateway
+    image: dasuntheek/codimates-gateway:latest
+    ports:
+      - "4000:4000"
+    networks:
+      - codimates-network
+
+  ead3:
+    container_name: user-service
+    image: dasuntheek/codimates-user-service:latest
+    ports:
+      - "4001:4001"
+    networks:
+      - codimates-network
+
+  ead4:
+    container_name: productandinventory
+    image: dasuntheek/codimates-productandinventory:latest
+    ports:
+      - "4002:4002"
+    networks:
+      - codimates-network
+
+networks:
+  codimates-network:
+    driver: bridge
