@@ -38,6 +38,15 @@ jobs:
         run: |
           scp -i ~/.ssh/id_rsa docker-compose.yml ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }}:codimates/docker-compose.yml
 
+      - name: Clean up existing containers and images
+        run: |
+          ssh -i ~/.ssh/id_rsa ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} <<EOF
+          cd codimates
+          docker stop $(docker ps -a -q) || true
+          docker rm $(docker ps -a -q) || true
+          docker rmi $(docker images -q) || true
+          EOF
+
       - name: Set ENV variables and deploy
         run: |
           ssh -i ~/.ssh/id_rsa ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} <<EOF
