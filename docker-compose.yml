@@ -4,7 +4,7 @@ services:
     container_name: client
     image: dasuntheek/codimates-client:latest
     ports:
-      - "3000:3000"
+      - "80:80"
     networks:
       - codimates-network
 
