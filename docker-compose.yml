@@ -12,7 +12,7 @@ services:
     container_name: gateway
     image: dasuntheek/codimates-gateway:latest
     ports:
-      - "4000:4000"
+      - "4005:4005"
     networks:
       - codimates-network
 
