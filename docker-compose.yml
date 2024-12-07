@@ -4,7 +4,7 @@ services:
     container_name: client
     image: dasuntheek/codimates-client:latest
     ports:
-      - "80:80"
+      - "3000:3000"
     networks:
       - codimates-network
 
@@ -29,6 +29,14 @@ services:
     image: dasuntheek/codimates-productandinventory:latest
     ports:
       - "4002:4002"
+    networks:
+      - codimates-network
+
+  ead5:
+    container_name: order
+    image: dasuntheek/codimates-order:latest
+    ports:
+      - "4004:4004"
     networks:
       - codimates-network
 
