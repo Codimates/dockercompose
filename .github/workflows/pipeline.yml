@@ -38,19 +38,22 @@ jobs:
         run: |
           scp -i ~/.ssh/id_rsa docker-compose.yml ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }}:codimates/docker-compose.yml
 
-      - name: Clean up existing containers and images
-        run: |
-          ssh -i ~/.ssh/id_rsa ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} <<EOF
-          cd codimates
-          docker stop $(docker ps -a -q) || true
-          docker rm $(docker ps -a -q) || true
-          docker rmi $(docker images -q) || true
-          EOF
+      # - name: Clean up existing containers and images
+      #   run: |
+      #     ssh -i ~/.ssh/id_rsa ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} <<EOF
+      #     cd codimates
+      #     docker stop $(docker ps -a -q) || true
+      #     docker rm $(docker ps -a -q) || true
+      #     docker rmi $(docker images -q) || true
+      #     EOF
 
       - name: Set ENV variables and deploy
         run: |
           ssh -i ~/.ssh/id_rsa ${{ secrets.VPS_USERNAME }}@${{ secrets.VPS_IP }} <<EOF
           cd codimates
-          docker-compose -f docker-compose.yml pull -q
-          docker-compose -f docker-compose.yml up -d
+          docker-compose -f docker-compose.yml pull
+          docker-compose -f docker-compose.yml up -d --no-deps --build --scale <service_name>=2
+          sleep 30
+          docker-compose -f docker-compose.yml up -d --no-deps --scale <service_name>=1
+          docker system prune -af --filter "label!=keep"
           EOF

@@ -40,6 +40,14 @@ services:
     networks:
       - codimates-network
 
+  ead6:
+    container_name: management
+    image: dasuntheek/codimates-management:latest
+    ports:
+      - "3001:3001"
+    networks:
+      - codimates-network
+
 networks:
   codimates-network:
     driver: bridge
