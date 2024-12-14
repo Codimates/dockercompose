@@ -7,11 +7,6 @@ services:
       - "3000:3000"
     networks:
       - codimates-network
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
 
   ead2:
     container_name: gateway
@@ -20,11 +15,6 @@ services:
       - "4005:4005"
     networks:
       - codimates-network
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:4005"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
 
   ead3:
     container_name: user-service
@@ -33,11 +23,6 @@ services:
       - "4001:4001"
     networks:
       - codimates-network
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:4001"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
 
   ead4:
     container_name: productandinventory
@@ -46,11 +31,6 @@ services:
       - "4002:4002"
     networks:
       - codimates-network
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:4002"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
 
   ead5:
     container_name: order
@@ -59,11 +39,6 @@ services:
       - "4004:4004"
     networks:
       - codimates-network
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:4004"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
 
   ead6:
     container_name: management
@@ -72,11 +47,6 @@ services:
       - "3001:3001"
     networks:
       - codimates-network
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3001"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
 
 networks:
   codimates-network:
